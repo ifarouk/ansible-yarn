@@ -1,0 +1,13 @@
+---
+- name: "Download yarn gpg key"
+  apt_key:
+    url: "{{yarn_gpg_key}}"
+    state: present
+
+- name: Add yarn
+  shell: echo "deb {{ yarn_version }}" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+- name: Install yarn
+  apt:
+    name: yarn
+    update_cache: yes
